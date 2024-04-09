@@ -4,10 +4,10 @@ export function NavList() {
   return (
     <div>
       <ul>
-        <li><Link to={"/QuemSomos"}>GrowTravel</Link></li>
-        <li><a href="/Servicos">Serviços</a></li>
-        <li><a href="/Planos">Planos</a></li>
-        <li><a href="/Contato">Contato</a></li>
+        <li><Link to={"/QuemSomos"}>Quem Somos</Link></li>
+        <li><Link to={"/Servicos"}>Serviços</Link></li>
+        <li><Link to={"/Planos"}>Planos</Link></li>
+        <li><Link to={"/Contato"}>Contatos</Link></li>
       </ul>
     </div>
   );

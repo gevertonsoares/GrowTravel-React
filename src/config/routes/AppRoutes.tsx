@@ -29,8 +29,7 @@ const router = createBrowserRouter([
     
 ]);
 
-const AppRoutes: React.FC = () =>  {
+ export function AppRoutes() {
     return <RouterProvider  router={router} />
 }
 
-export default AppRoutes
