@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { MainContato as ContatoStyled } from "../styled/MainContato";
 import { v4 as generateUUID } from "uuid";
 
@@ -19,8 +19,8 @@ export function MainContato() {
     const [mensagem, setMensagem] = useState<string>("");
 
 
-    function enviar(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault()
+    const submitForm = useCallback((event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
         const novaMensagem = { 
             id: generateUUID(), 
@@ -28,24 +28,23 @@ export function MainContato() {
             email, 
             telefone, 
             mensagem
-        }
+        };
 
-        setMensagens((m) => [novaMensagem, ...m])
-        localStorage.setItem('mensagem', JSON.stringify(novaMensagem))
-        setNome('')
-        setEmail('')
-        setTelefone('')
-        setMensagem('')
-    }
-    
-    console.log(mensagens);
+            setMensagens((mensagensExistentes) => [novaMensagem, ...mensagensExistentes])
+            localStorage.setItem('mensagens', JSON.stringify([...mensagens,novaMensagem]))
+            setNome('')
+            setEmail('')
+            setTelefone('')
+            setMensagem('')
+        }, [nome, email, telefone, mensagem, mensagens, setMensagens, setNome, setEmail, setTelefone, setMensagem]);
+
 
       return (
         <ContatoStyled>
             <div>
                 <h2>Formulário</h2>
                 <div>
-                    <form onSubmit={enviar}>
+                    <form onSubmit={submitForm}>
                         <label>Nome:</label> <br />
                         <input type="text" name="nome" value={nome} onChange={(event) => setNome(event.target.value)} required /> <br />
 
